@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import { useAuth } from "../../context/authcontext";
+import { useAuth } from "../../context/AuthContext";
 import "./Login.css";
 
 const Login = () => {
@@ -66,6 +66,11 @@ switch (user.role) {
       <div className="login-container">
 
         <div className="login-left">
+          <img
+            src="/logo/logoatq.png"
+            alt="Logo SMPIT At-Taufiq"
+            className="login-logo"
+          />
           <h2>Selamat Datang</h2>
           <p>
             Sistem Inventaris dan Pelaporan Sarana

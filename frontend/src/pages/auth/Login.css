@@ -21,6 +21,13 @@
   box-shadow: 0 0 21px rgba(0, 0, 0, 0.12);
 }
 
+.login-logo {
+  width: 1000px;
+  height: 234px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
 .login-left {
   display: flex;
   flex-direction: column;
@@ -36,7 +43,7 @@
 }
 
 .login-left p {
-  font-size: 18px;
+  font-size: 20px;
   color: #2b2b2b;
   line-height: 1.5;
 }

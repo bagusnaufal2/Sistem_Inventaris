@@ -1,0 +1,39 @@
+.sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #20619e #143f66;
+}
+
+.sidebar-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: #143f66;
+  border-radius: 10px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #20619e;
+  border-radius: 10px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: #3988c5;
+}
+
+.sidebar-container {
+  transition: width 0.3s ease-in-out;
+}
+
+.sidebar-menu-item {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+@media screen and (max-width: 640px) {
+  .sidebar-container {
+    height: 100vh;
+  }
+}
