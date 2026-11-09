@@ -1,13 +1,49 @@
+import { useEffect, useState } from "react";
 import MainWrapper from "../../components/layout/MainWrapper";
 import { useAuth } from "../../context/AuthContext";
+import api from "../../services/api";
 
 const Dashboard = () => {
   const { user } = useAuth();
 
+  // Angka awal 0; diisi dari GET /api/dashboard/admin saat mount.
+  // Bila API gagal (mis. backend tidak jalan), angka tetap 0 dan halaman tidak crash.
+  const [stats, setStats] = useState({
+    totalInventaris: 0,
+    inventarisBaik: 0,
+    inventarisRusak: 0,
+    laporanKerusakan: 0,
+  });
+
+  useEffect(() => {
+    let cancelled = false;
+
+    api
+      .get("/dashboard/admin")
+      .then((response) => {
+        if (cancelled) return;
+        const dashboard =
+          response?.data?.data?.dashboard || response?.data?.dashboard || {};
+        setStats({
+          totalInventaris: dashboard.totalInventaris ?? 0,
+          inventarisBaik: dashboard.inventarisBaik ?? 0,
+          inventarisRusak: dashboard.inventarisRusak ?? 0,
+          laporanKerusakan: dashboard.laporanKerusakan ?? 0,
+        });
+      })
+      .catch(() => {
+        // Fallback: biarkan angka 0 yang sudah ada.
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const summaryCards = [
     {
       title: "Total Inventaris",
-      value: "0",
+      value: String(stats.totalInventaris),
       description: "Seluruh barang terdaftar",
       icon: "📦",
       color: "bg-blue-100",
@@ -15,15 +51,15 @@ const Dashboard = () => {
     },
     {
       title: "Kondisi Baik",
-      value: "0",
+      value: String(stats.inventarisBaik),
       description: "Barang dalam kondisi baik",
       icon: "✓",
-      color: "bg-green-100",
-      iconColor: "text-green-600",
+      color: "bg-[#DCFCE7]",
+      iconColor: "text-[#16A34A]",
     },
     {
       title: "Barang Rusak",
-      value: "0",
+      value: String(stats.inventarisRusak),
       description: "Barang perlu diperiksa",
       icon: "⚠",
       color: "bg-red-100",
@@ -31,7 +67,7 @@ const Dashboard = () => {
     },
     {
       title: "Laporan Menunggu",
-      value: "0",
+      value: String(stats.laporanKerusakan),
       description: "Laporan belum ditangani",
       icon: "◷",
       color: "bg-orange-100",
@@ -45,7 +81,7 @@ const Dashboard = () => {
       description="Selamat datang di Sistem Inventaris dan Pelaporan Sarana SMPIT At-Taufiq."
     >
       {/* Welcome */}
-      <div className="bg-[#143F66] rounded-xl p-6 text-white">
+      <div className="bg-[linear-gradient(90deg,#2A7050,#307C58)] rounded-xl p-6 text-white">
         <h2 className="text-xl font-semibold">
           Selamat Datang, {user?.name || "Admin"}!
         </h2>
@@ -67,7 +103,7 @@ const Dashboard = () => {
                   {card.title}
                 </p>
 
-                <h3 className="text-3xl font-bold text-[#143F66] mt-3">
+                <h3 className="text-3xl font-bold text-[#166143] mt-3">
                   {card.value}
                 </h3>
               </div>
@@ -89,7 +125,7 @@ const Dashboard = () => {
       {/* Recent Activity */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100">
         <div className="p-5 border-b border-gray-100">
-          <h2 className="text-lg font-semibold text-[#143F66]">
+          <h2 className="text-lg font-semibold text-[#163A5F]">
             Aktivitas Terbaru
           </h2>
 

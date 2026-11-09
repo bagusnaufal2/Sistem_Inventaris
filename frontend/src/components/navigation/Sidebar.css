@@ -1,6 +1,6 @@
 .sidebar-scroll {
   scrollbar-width: thin;
-  scrollbar-color: #20619e #143f66;
+  scrollbar-color: #1c714e #104f37;
 }
 
 .sidebar-scroll::-webkit-scrollbar {
@@ -9,17 +9,17 @@
 }
 
 .sidebar-scroll::-webkit-scrollbar-track {
-  background: #143f66;
+  background: #104f37;
   border-radius: 10px;
 }
 
 .sidebar-scroll::-webkit-scrollbar-thumb {
-  background: #20619e;
+  background: #1c714e;
   border-radius: 10px;
 }
 
 .sidebar-scroll::-webkit-scrollbar-thumb:hover {
-  background: #3988c5;
+  background: #23845b;
 }
 
 .sidebar-container {

@@ -9,9 +9,9 @@ const MenuItem = ({ label, path, icon, isOpen }) => {
   return (
     <div
       onClick={() => navigate(path)}
-      className="flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors hover:bg-[#20619E]"
+      className="flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors hover:bg-[#1C714E]"
       style={{
-        backgroundColor: isActive ? "#20619E" : "#123A5E",
+        backgroundColor: isActive ? "#225946" : "transparent",
         color: "white",
         alignSelf: "stretch",
       }}

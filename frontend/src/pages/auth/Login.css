@@ -1,6 +1,6 @@
 .login-page {
   min-height: 100vh;
-  background-color: #133354;
+  background: linear-gradient(135deg, #0d4930 0%, #166442 50%, #144d33 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,7 +38,7 @@
 .login-left h2 {
   font-size: 32px;
   font-weight: 600;
-  color: #143f66;
+  color: #205a40;
   margin-bottom: 10px;
 }
 
@@ -74,12 +74,12 @@
 }
 
 .login-input-group input:focus {
-  border-color: #143f66;
+  border-color: #23845b;
 }
 
 .login-btn {
   width: 100%;
-  background-color: #143f66;
+  background-color: #23845b;
   color: white;
   border: none;
   padding: 13px;
@@ -90,7 +90,7 @@
 }
 
 .login-btn:hover {
-  background-color: #0e2f4d;
+  background-color: #1b6b49;
 }
 
 .login-btn:disabled {

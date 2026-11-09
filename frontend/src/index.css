@@ -1,5 +1,29 @@
 @import "tailwindcss";
 
+/* Palet warna dari Figma "Sistem Pelanggaran SDIT (Copy)" — hanya dibaca, file Figma tidak diubah.
+   KEPUTUSAN FINAL 2026-11-09 (user): HIJAU = tema utama, BIRU = sekunder.
+   (Hijau di Figma memang tema SD/SDIT, tapi user memutuskan hijau dipakai sebagai
+   tema utama Sistem Inventaris SMPIT ini. Jangan diubah lagi kecuali user bilang.) */
+:root {
+  /* Hijau (tema utama) */
+  --green-sidebar-top: #104f37;
+  --green-sidebar-mid: #166042;
+  --green-sidebar-bottom: #1c714e;
+  --green-active: #225946;
+  --green-button: #23845b;
+  --green-button-hover: #1b6b49;
+  --green-success: #16a34a;
+  --green-tint: #dcfce7;
+  --green-stat: #166143;
+  --green-heading: #205a40;
+  --green-banner-from: #2a7050;
+  --green-banner-to: #307c58;
+  /* Biru (sekunder) */
+  --blue-navy: #163a5f;
+  --blue-primary: #2878b5;
+  --blue-light: #dceeff;
+}
+
 * {
   box-sizing: border-box;
 }

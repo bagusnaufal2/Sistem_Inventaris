@@ -19,13 +19,13 @@ const MainWrapper = ({ title, description, children }) => {
           <div className="flex gap-4 items-center">
             <button
               onClick={() => navigate(-1)}
-              className="text-[#143F66] hover:text-[#20619E] text-2xl"
+              className="text-[#163A5F] hover:text-[#2878B5] text-2xl"
               aria-label="Kembali"
             >
               ←
             </button>
 
-            <h1 className="text-2xl sm:text-3xl text-[#143F66] font-semibold">
+            <h1 className="text-2xl sm:text-3xl text-[#163A5F] font-semibold">
               {title}
             </h1>
           </div>
