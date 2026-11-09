@@ -2,6 +2,14 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const kategoriRoutes = require("./routes/kategoriRoutes");
+const lokasiRoutes = require("./routes/lokasiRoutes");
+const inventarisRoutes = require("./routes/inventarisRoutes");
+const kerusakanRoutes = require("./routes/kerusakanRoutes");
+const perbaikanRoutes = require("./routes/perbaikanRoutes");
+const penggunaRoutes = require("./routes/penggunaRoutes");
+const logRoutes = require("./routes/logRoutes");
+const laporanRoutes = require("./routes/laporanRoutes");
 
 const { testConnection } = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
@@ -17,6 +25,14 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/kategori", kategoriRoutes);
+app.use("/api/lokasi", lokasiRoutes);
+app.use("/api/inventaris", inventarisRoutes);
+app.use("/api/kerusakan", kerusakanRoutes);
+app.use("/api/perbaikan", perbaikanRoutes);
+app.use("/api/pengguna", penggunaRoutes);
+app.use("/api/log-aktivitas", logRoutes);
+app.use("/api/laporan", laporanRoutes);
 
 app.get("/", (req, res) => {
   res.json({

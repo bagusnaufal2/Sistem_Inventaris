@@ -1,15 +1,26 @@
 import { useState } from "react";
 import MainWrapper from "../../components/layout/MainWrapper";
 
-// DATA CONTOH — belum ada API backend untuk modul ini
-// Nilai awal form adalah data contoh; penyimpanan hanya ke state lokal.
-const Pengaturan = () => {
-  const [form, setForm] = useState({
+// Pengaturan disimpan di localStorage (belum ada tabel pengaturan di backend).
+const KEY_PENGATURAN = "inventaris.pengaturan";
+
+const nilaiAwal = () => {
+  try {
+    const tersimpan = JSON.parse(localStorage.getItem(KEY_PENGATURAN) || "null");
+    if (tersimpan) return tersimpan;
+  } catch {
+    // abaikan isi localStorage yang rusak, pakai nilai awal
+  }
+  return {
     namaSekolah: "SMPIT At-Taufiq",
     emailAdmin: "admin@at-taufiq.sch.id",
     tahunAjaran: "2026/2027",
     zonaWaktu: "Asia/Jakarta",
-  });
+  };
+};
+
+const Pengaturan = () => {
+  const [form, setForm] = useState(nilaiAwal);
   const [tersimpan, setTersimpan] = useState(false);
 
   const handleChange = (e) => {
@@ -19,7 +30,8 @@ const Pengaturan = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Belum ada API backend untuk pengaturan — simpan hanya ke state lokal.
+    // Belum ada API backend untuk pengaturan — simpan ke localStorage browser.
+    localStorage.setItem(KEY_PENGATURAN, JSON.stringify(form));
     setTersimpan(true);
   };
 

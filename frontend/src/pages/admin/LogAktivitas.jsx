@@ -1,25 +1,56 @@
+import { useCallback, useEffect, useState } from "react";
 import MainWrapper from "../../components/layout/MainWrapper";
-
-// DATA CONTOH — belum ada API backend untuk modul ini
-const logContoh = [
-  { id: 1, waktu: "09 Nov 2026, 08:15", pengguna: "Ahmad Fauzi", aksi: "Login", detail: "Admin masuk ke sistem dari perangkat kantor." },
-  { id: 2, waktu: "09 Nov 2026, 08:32", pengguna: "Rina Wulandari", aksi: "Lapor Kerusakan", detail: "Melaporkan kerusakan Kipas Angin Standing (KR-008)." },
-  { id: 3, waktu: "09 Nov 2026, 09:05", pengguna: "Dedi Kurniawan", aksi: "Mulai Perbaikan", detail: "Memulai perbaikan Kipas Angin Standing." },
-  { id: 4, waktu: "08 Nov 2026, 13:40", pengguna: "Ahmad Fauzi", aksi: "Tambah Barang", detail: "Menambahkan 10 unit Buku Paket Matematika Kelas 8." },
-  { id: 5, waktu: "08 Nov 2026, 15:12", pengguna: "Rizky Pratama", aksi: "Selesaikan Perbaikan", detail: "Perbaikan Papan Tulis Whiteboard selesai." },
-  { id: 6, waktu: "07 Nov 2026, 10:20", pengguna: "Siti Aminah", aksi: "Lapor Kerusakan", detail: "Melaporkan kerusakan Proyektor Epson EB-X05 (KR-004)." },
-  { id: 7, waktu: "07 Nov 2026, 11:00", pengguna: "Ahmad Fauzi", aksi: "Ubah Pengguna", detail: "Mengubah role Ratna Dewi menjadi Nonaktif." },
-  { id: 8, waktu: "06 Nov 2026, 14:25", pengguna: "Maya Lestari", aksi: "Lapor Kerusakan", detail: "Melaporkan kerusakan Speaker Portable JBL (KR-005)." },
-  { id: 9, waktu: "06 Nov 2026, 16:45", pengguna: "Dedi Kurniawan", aksi: "Selesaikan Perbaikan", detail: "Perbaikan Speaker Portable JBL selesai." },
-  { id: 10, waktu: "05 Nov 2026, 09:30", pengguna: "Ahmad Fauzi", aksi: "Logout", detail: "Admin keluar dari sistem." },
-];
+import api from "../../services/api";
+import { formatTanggalWaktu, pesanError } from "../../utils/format";
 
 const LogAktivitas = () => {
+  const [log, setLog] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [q, setQ] = useState("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const muatLog = useCallback(async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await api.get("/log-aktivitas", { params: { page, limit: 10, q: q || undefined } });
+      setLog(res.data.data || []);
+      setTotalPages(res.data.pagination?.totalPages || 1);
+    } catch (err) {
+      setError(pesanError(err, "Gagal memuat log aktivitas."));
+    } finally {
+      setLoading(false);
+    }
+  }, [page, q]);
+
+  useEffect(() => {
+    muatLog();
+  }, [muatLog]);
+
   return (
     <MainWrapper
       title="Log Aktivitas"
       description="Riwayat aktivitas seluruh pengguna dalam sistem inventaris."
     >
+      <div className="flex flex-col sm:flex-row sm:justify-between gap-3">
+        <input
+          type="text"
+          placeholder="Cari pengguna / aksi / detail..."
+          value={q}
+          onChange={(e) => { setQ(e.target.value); setPage(1); }}
+          className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-72 focus:outline-none focus:ring-2 focus:ring-[#23845B]"
+        />
+      </div>
+
+      {error && (
+        <div className="bg-red-50 text-red-700 text-sm font-medium px-4 py-3 rounded-lg">
+          {error}{" "}
+          <button onClick={muatLog} className="underline font-semibold">Coba lagi</button>
+        </div>
+      )}
+
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -32,20 +63,33 @@ const LogAktivitas = () => {
               </tr>
             </thead>
             <tbody>
-              {logContoh.map((log) => (
-                <tr key={log.id} className="border-t border-gray-100 hover:bg-gray-50">
-                  <td className="px-5 py-3 text-gray-600 whitespace-nowrap">{log.waktu}</td>
-                  <td className="px-5 py-3 font-medium text-gray-800">{log.pengguna}</td>
-                  <td className="px-5 py-3">
-                    <span className="inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-[#DCEEFF] text-[#2878B5]">
-                      {log.aksi}
-                    </span>
-                  </td>
-                  <td className="px-5 py-3 text-gray-600">{log.detail}</td>
-                </tr>
-              ))}
+              {loading ? (
+                <tr><td colSpan={4} className="px-5 py-8 text-center text-gray-400">Memuat data...</td></tr>
+              ) : log.length === 0 ? (
+                <tr><td colSpan={4} className="px-5 py-8 text-center text-gray-400">Belum ada aktivitas.</td></tr>
+              ) : (
+                log.map((item) => (
+                  <tr key={item.id} className="border-t border-gray-100 hover:bg-gray-50">
+                    <td className="px-5 py-3 text-gray-600 whitespace-nowrap">{formatTanggalWaktu(item.waktu)}</td>
+                    <td className="px-5 py-3 font-medium text-gray-800">{item.pengguna}</td>
+                    <td className="px-5 py-3">
+                      <span className="inline-block px-2.5 py-1 rounded-full text-xs font-semibold bg-[#DCEEFF] text-[#2878B5]">
+                        {item.aksi}
+                      </span>
+                    </td>
+                    <td className="px-5 py-3 text-gray-600">{item.detail}</td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
+        </div>
+        <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 text-sm text-gray-500">
+          <span>Halaman {page} dari {totalPages}</span>
+          <div className="flex gap-2">
+            <button disabled={page <= 1} onClick={() => setPage(page - 1)} className="px-3 py-1.5 rounded-lg border border-gray-200 disabled:opacity-40">Sebelumnya</button>
+            <button disabled={page >= totalPages} onClick={() => setPage(page + 1)} className="px-3 py-1.5 rounded-lg border border-gray-200 disabled:opacity-40">Berikutnya</button>
+          </div>
         </div>
       </div>
     </MainWrapper>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import MainWrapper from "../../components/layout/MainWrapper";
 import { useAuth } from "../../context/AuthContext";
 import api from "../../services/api";
+import { formatTanggalWaktu } from "../../utils/format";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -14,6 +15,8 @@ const Dashboard = () => {
     inventarisRusak: 0,
     laporanKerusakan: 0,
   });
+  const [aktivitas, setAktivitas] = useState([]);
+  const [aktivitasGagal, setAktivitasGagal] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -33,6 +36,16 @@ const Dashboard = () => {
       })
       .catch(() => {
         // Fallback: biarkan angka 0 yang sudah ada.
+      });
+
+    api
+      .get("/log-aktivitas", { params: { limit: 5 } })
+      .then((response) => {
+        if (cancelled) return;
+        setAktivitas(response?.data?.data || []);
+      })
+      .catch(() => {
+        if (!cancelled) setAktivitasGagal(true);
       });
 
     return () => {
@@ -134,17 +147,33 @@ const Dashboard = () => {
           </p>
         </div>
 
-        <div className="p-8 text-center">
-          <div className="text-4xl mb-3">📋</div>
+        {aktivitasGagal || aktivitas.length === 0 ? (
+          <div className="p-8 text-center">
+            <div className="text-4xl mb-3">📋</div>
 
-          <h3 className="text-gray-700 font-medium">
-            Belum Ada Aktivitas
-          </h3>
+            <h3 className="text-gray-700 font-medium">
+              Belum Ada Aktivitas
+            </h3>
 
-          <p className="text-sm text-gray-400 mt-2">
-            Aktivitas sistem akan ditampilkan di sini.
-          </p>
-        </div>
+            <p className="text-sm text-gray-400 mt-2">
+              Aktivitas sistem akan ditampilkan di sini.
+            </p>
+          </div>
+        ) : (
+          <ul className="divide-y divide-gray-100">
+            {aktivitas.map((item) => (
+              <li key={item.id} className="px-5 py-3.5 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+                <span className="inline-block self-start px-2.5 py-1 rounded-full text-xs font-semibold bg-[#DCEEFF] text-[#2878B5] whitespace-nowrap">
+                  {item.aksi}
+                </span>
+                <span className="text-sm text-gray-700 flex-1">{item.detail}</span>
+                <span className="text-xs text-gray-400 whitespace-nowrap">
+                  {item.pengguna} • {formatTanggalWaktu(item.waktu)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </MainWrapper>
   );

@@ -64,6 +64,16 @@ const login = async (req, res) => {
       }
     );
 
+    // Catat login ke log aktivitas (best-effort, jangan gagalkan login).
+    try {
+      await db.execute(
+        "INSERT INTO log_aktivitas (user_id, pengguna, aksi, detail) VALUES (?, ?, 'Login', 'Masuk ke sistem.')",
+        [user.id, user.name]
+      );
+    } catch (logError) {
+      console.error("Gagal mencatat log login:", logError.message);
+    }
+
     return res.status(200).json({
       success: true,
       message: "Login berhasil.",
