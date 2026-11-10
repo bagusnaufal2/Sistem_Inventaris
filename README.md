@@ -43,7 +43,7 @@ Sistem_Inventaris/
 └── frontend/
     └── src/
         ├── pages/admin/       # 9 halaman admin + Dashboard
-        ├── services/api.js    # axios, baseURL http://localhost:5000/api
+        ├── services/api.js    # axios, baseURL "/api" (relatif; di-dev diteruskan Vite proxy ke http://localhost:5000)
         └── utils/format.js    # Helper format tanggal/angka
 ```
 
