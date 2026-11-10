@@ -13,5 +13,7 @@ export default defineConfig({
     proxy: {
       "/api": "http://localhost:5000",
     },
+    // Izinkan host tunnel Pinggy (berubah tiap tunnel baru) mengakses Vite dev server.
+    allowedHosts: [".pinggy-free.link", ".free.pinggy.net"],
   },
 })
