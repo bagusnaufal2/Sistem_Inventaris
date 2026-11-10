@@ -1,27 +1,37 @@
 @import "tailwindcss";
 
-/* Palet warna dari Figma "Sistem Pelanggaran SDIT (Copy)" — hanya dibaca, file Figma tidak diubah.
-   KEPUTUSAN FINAL 2026-11-09 (user): HIJAU = tema utama, BIRU = sekunder.
-   (Hijau di Figma memang tema SD/SDIT, tapi user memutuskan hijau dipakai sebagai
-   tema utama Sistem Inventaris SMPIT ini. Jangan diubah lagi kecuali user bilang.) */
+/* Palet warna dari Figma "Sistem Inventaris dan Pelaporan Sarana SMPIT (Copy)"
+   — hanya dibaca, file Figma tidak diubah.
+   KEPUTUSAN FINAL 2026-11-10 (user): BIRU = tema utama (dari Figma SMPIT asli).
+   Tema hijau sebelumnya berasal dari file Figma lain (Sistem Pelanggaran SDIT)
+   dan sudah diganti total. Hijau hanya dipakai sebagai warna SEMANTIK
+   (sukses / kondisi baik) pada badge dan pesan, bukan sebagai warna tema. */
 :root {
-  /* Hijau (tema utama) */
-  --green-sidebar-top: #104f37;
-  --green-sidebar-mid: #166042;
-  --green-sidebar-bottom: #1c714e;
-  --green-active: #225946;
-  --green-button: #23845b;
-  --green-button-hover: #1b6b49;
-  --green-success: #16a34a;
-  --green-tint: #dcfce7;
-  --green-stat: #166143;
-  --green-heading: #205a40;
-  --green-banner-from: #2a7050;
-  --green-banner-to: #307c58;
-  /* Biru (sekunder) */
-  --blue-navy: #163a5f;
-  --blue-primary: #2878b5;
-  --blue-light: #dceeff;
+  /* Biru (tema utama — Figma SMPIT) */
+  --navy-sidebar: #133354;
+  --navy-active: #1b4a75;
+  --blue-primary: #2975b2;
+  --blue-primary-hover: #1f598a;
+  --blue-banner-from: #1b4a76;
+  --blue-banner-mid: #1f598a;
+  --blue-banner-to: #23689e;
+  --blue-light: #e6f2ff;
+  --blue-bar-light: #add1ed;
+  --blue-login-button: #4274d9;
+  --blue-login-button-hover: #3560b8;
+  /* Netral */
+  --page-bg: #f6f8fb;
+  --card-border: #eaeef4;
+  --menu-dim: #a4b5c7;
+  /* Semantik (bukan warna tema) */
+  --success-bg: #e3f5eb;
+  --success-text: #219461;
+  --success-badge-bg: #dcfce7;
+  --success-badge-text: #16a34a;
+  --warning-bg: #fff2de;
+  --warning-text: #e07a1f;
+  --danger-bg: #fce8e8;
+  --danger-text: #c74040;
 }
 
 * {

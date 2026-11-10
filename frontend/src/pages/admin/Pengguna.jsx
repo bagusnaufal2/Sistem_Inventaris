@@ -5,7 +5,7 @@ import { labelRole, pesanError } from "../../utils/format";
 
 const badgeRole = (role) => {
   if (role === "ADMIN") return "bg-[#DCFCE7] text-[#16A34A]";
-  if (role === "PETUGAS") return "bg-[#DCEEFF] text-[#2878B5]";
+  if (role === "PETUGAS") return "bg-[#E6F2FF] text-[#2975B2]";
   return "bg-gray-100 text-gray-600";
 };
 
@@ -100,10 +100,10 @@ const Pengguna = () => {
           placeholder="Cari nama / email..."
           value={q}
           onChange={(e) => { setQ(e.target.value); setPage(1); }}
-          className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-[#23845B]"
+          className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-[#2975B2]"
         />
         <div className="flex justify-end">
-          <button onClick={bukaTambah} className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-4 py-2.5 rounded-lg">
+          <button onClick={bukaTambah} className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-4 py-2.5 rounded-lg">
             + Tambah Pengguna
           </button>
         </div>
@@ -122,11 +122,11 @@ const Pengguna = () => {
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-xl shadow-sm border border-[#EAEEF4] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 text-left text-[#163A5F]">
+              <tr className="bg-[#F6F8FB] text-left text-xs uppercase tracking-wide text-gray-500">
                 <th className="px-5 py-3 font-semibold">Nama</th>
                 <th className="px-5 py-3 font-semibold">Email</th>
                 <th className="px-5 py-3 font-semibold">Role</th>
@@ -141,7 +141,7 @@ const Pengguna = () => {
                 <tr><td colSpan={5} className="px-5 py-8 text-center text-gray-400">Belum ada pengguna.</td></tr>
               ) : (
                 pengguna.map((item) => (
-                  <tr key={item.id} className="border-t border-gray-100 hover:bg-gray-50">
+                  <tr key={item.id} className="border-t border-[#EAEEF4] hover:bg-gray-50">
                     <td className="px-5 py-3 font-medium text-gray-800">{item.name}</td>
                     <td className="px-5 py-3 text-gray-600">{item.email}</td>
                     <td className="px-5 py-3">
@@ -156,7 +156,7 @@ const Pengguna = () => {
                     </td>
                     <td className="px-5 py-3">
                       <div className="flex gap-2">
-                        <button onClick={() => bukaUbah(item)} className="text-[#2878B5] hover:underline text-xs font-semibold">Ubah</button>
+                        <button onClick={() => bukaUbah(item)} className="text-[#2975B2] hover:underline text-xs font-semibold">Ubah</button>
                         <button onClick={() => hapus(item)} className="text-red-600 hover:underline text-xs font-semibold">Hapus</button>
                       </div>
                     </td>
@@ -166,7 +166,7 @@ const Pengguna = () => {
             </tbody>
           </table>
         </div>
-        <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 text-sm text-gray-500">
+        <div className="flex items-center justify-between px-5 py-3 border-t border-[#EAEEF4] text-sm text-gray-500">
           <span>Halaman {page} dari {totalPages}</span>
           <div className="flex gap-2">
             <button disabled={page <= 1} onClick={() => setPage(page - 1)} className="px-3 py-1.5 rounded-lg border border-gray-200 disabled:opacity-40">Sebelumnya</button>
@@ -178,26 +178,26 @@ const Pengguna = () => {
       {modalTerbuka && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-xl shadow-lg w-full max-w-lg p-6">
-            <h2 className="text-lg font-semibold text-[#163A5F]">{editId ? "Ubah Pengguna" : "Tambah Pengguna"}</h2>
+            <h2 className="text-lg font-semibold text-[#133354]">{editId ? "Ubah Pengguna" : "Tambah Pengguna"}</h2>
             <form onSubmit={simpan} className="flex flex-col gap-4 mt-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Nama</label>
-                <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="Contoh: Ahmad Fauzi" />
+                <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="Contoh: Ahmad Fauzi" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
-                <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="nama@at-taufiq.sch.id" />
+                <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="nama@at-taufiq.sch.id" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
                   Password {editId ? "(kosongkan bila tidak diubah)" : "(minimal 8 karakter)"}
                 </label>
-                <input type="password" required={!editId} minLength={8} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="••••••••" />
+                <input type="password" required={!editId} minLength={8} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="••••••••" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Role</label>
-                  <select value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+                  <select value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
                     <option value="ADMIN">Admin</option>
                     <option value="PETUGAS">Petugas</option>
                     <option value="GURU">Guru</option>
@@ -206,7 +206,7 @@ const Pengguna = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Status</label>
-                  <select value={form.isActive ? "aktif" : "nonaktif"} onChange={(e) => setForm({ ...form, isActive: e.target.value === "aktif" })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+                  <select value={form.isActive ? "aktif" : "nonaktif"} onChange={(e) => setForm({ ...form, isActive: e.target.value === "aktif" })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
                     <option value="aktif">Aktif</option>
                     <option value="nonaktif">Nonaktif</option>
                   </select>
@@ -214,7 +214,7 @@ const Pengguna = () => {
               </div>
               <div className="flex justify-end gap-2 pt-1">
                 <button type="button" onClick={() => setModalTerbuka(false)} className="px-4 py-2.5 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600">Batal</button>
-                <button type="submit" disabled={menyimpan} className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-5 py-2.5 rounded-lg disabled:opacity-60">
+                <button type="submit" disabled={menyimpan} className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg disabled:opacity-60">
                   {menyimpan ? "Menyimpan..." : "Simpan"}
                 </button>
               </div>

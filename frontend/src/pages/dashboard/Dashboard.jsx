@@ -59,32 +59,32 @@ const Dashboard = () => {
       value: String(stats.totalInventaris),
       description: "Seluruh barang terdaftar",
       icon: "📦",
-      color: "bg-blue-100",
-      iconColor: "text-blue-600",
+      color: "bg-[#E6F2FF]",
+      iconColor: "text-[#2975B2]",
     },
     {
       title: "Kondisi Baik",
       value: String(stats.inventarisBaik),
       description: "Barang dalam kondisi baik",
       icon: "✓",
-      color: "bg-[#DCFCE7]",
-      iconColor: "text-[#16A34A]",
+      color: "bg-[#E3F5EB]",
+      iconColor: "text-[#219461]",
     },
     {
       title: "Barang Rusak",
       value: String(stats.inventarisRusak),
       description: "Barang perlu diperiksa",
       icon: "⚠",
-      color: "bg-red-100",
-      iconColor: "text-red-600",
+      color: "bg-[#FCE8E8]",
+      iconColor: "text-[#C74040]",
     },
     {
       title: "Laporan Menunggu",
       value: String(stats.laporanKerusakan),
       description: "Laporan belum ditangani",
       icon: "◷",
-      color: "bg-orange-100",
-      iconColor: "text-orange-600",
+      color: "bg-[#FFF2DE]",
+      iconColor: "text-[#E07A1F]",
     },
   ];
 
@@ -94,7 +94,7 @@ const Dashboard = () => {
       description="Selamat datang di Sistem Inventaris dan Pelaporan Sarana SMPIT At-Taufiq."
     >
       {/* Welcome */}
-      <div className="bg-[linear-gradient(90deg,#2A7050,#307C58)] rounded-xl p-6 text-white">
+      <div className="bg-[linear-gradient(90deg,#1B4A76,#1F598A,#23689E)] rounded-xl p-6 text-white">
         <h2 className="text-xl font-semibold">
           Selamat Datang, {user?.name || "Admin"}!
         </h2>
@@ -108,7 +108,7 @@ const Dashboard = () => {
         {summaryCards.map((card, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl p-5 shadow-sm border border-gray-100"
+            className="bg-white rounded-xl p-5 shadow-sm border border-[#EAEEF4]"
           >
             <div className="flex justify-between items-start">
               <div>
@@ -116,7 +116,7 @@ const Dashboard = () => {
                   {card.title}
                 </p>
 
-                <h3 className="text-3xl font-bold text-[#166143] mt-3">
+                <h3 className="text-3xl font-bold text-[#133354] mt-3">
                   {card.value}
                 </h3>
               </div>
@@ -136,9 +136,9 @@ const Dashboard = () => {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="p-5 border-b border-gray-100">
-          <h2 className="text-lg font-semibold text-[#163A5F]">
+      <div className="bg-white rounded-xl shadow-sm border border-[#EAEEF4]">
+        <div className="p-5 border-b border-[#EAEEF4]">
+          <h2 className="text-lg font-semibold text-[#133354]">
             Aktivitas Terbaru
           </h2>
 
@@ -160,10 +160,10 @@ const Dashboard = () => {
             </p>
           </div>
         ) : (
-          <ul className="divide-y divide-gray-100">
+          <ul className="divide-y divide-[#EAEEF4]">
             {aktivitas.map((item) => (
               <li key={item.id} className="px-5 py-3.5 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
-                <span className="inline-block self-start px-2.5 py-1 rounded-full text-xs font-semibold bg-[#DCEEFF] text-[#2878B5] whitespace-nowrap">
+                <span className="inline-block self-start px-2.5 py-1 rounded-full text-xs font-semibold bg-[#E6F2FF] text-[#2975B2] whitespace-nowrap">
                   {item.aksi}
                 </span>
                 <span className="text-sm text-gray-700 flex-1">{item.detail}</span>

@@ -5,8 +5,8 @@ import { formatRupiah, formatTanggal, parseRupiah, pesanError } from "../../util
 
 const badgeStatus = (status) => {
   if (status === "Selesai") return "bg-[#DCFCE7] text-[#16A34A]";
-  if (status === "Menunggu Suku Cadang") return "bg-amber-100 text-amber-700";
-  return "bg-[#DCEEFF] text-[#2878B5]";
+  // Berlangsung / Menunggu Suku Cadang — oranye Figma
+  return "bg-[#FFF2DE] text-[#B45309]";
 };
 
 const formAwal = {
@@ -127,9 +127,9 @@ const Perbaikan = () => {
             placeholder="Cari barang / teknisi..."
             value={q}
             onChange={(e) => { setQ(e.target.value); setPage(1); }}
-            className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-[#23845B]"
+            className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-[#2975B2]"
           />
-          <select value={filterStatus} onChange={(e) => { setFilterStatus(e.target.value); setPage(1); }} className="border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+          <select value={filterStatus} onChange={(e) => { setFilterStatus(e.target.value); setPage(1); }} className="border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
             <option value="">Semua Status</option>
             <option value="Berlangsung">Berlangsung</option>
             <option value="Selesai">Selesai</option>
@@ -137,7 +137,7 @@ const Perbaikan = () => {
           </select>
         </div>
         <div className="flex justify-end">
-          <button onClick={bukaTambah} className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-4 py-2.5 rounded-lg">
+          <button onClick={bukaTambah} className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-4 py-2.5 rounded-lg">
             + Tambah Perbaikan
           </button>
         </div>
@@ -156,11 +156,11 @@ const Perbaikan = () => {
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-xl shadow-sm border border-[#EAEEF4] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 text-left text-[#163A5F]">
+              <tr className="bg-[#F6F8FB] text-left text-xs uppercase tracking-wide text-gray-500">
                 <th className="px-5 py-3 font-semibold">Barang</th>
                 <th className="px-5 py-3 font-semibold">Teknisi / Petugas</th>
                 <th className="px-5 py-3 font-semibold">Tanggal Mulai</th>
@@ -177,7 +177,7 @@ const Perbaikan = () => {
                 <tr><td colSpan={7} className="px-5 py-8 text-center text-gray-400">Belum ada data perbaikan.</td></tr>
               ) : (
                 data.map((item) => (
-                  <tr key={item.id} className="border-t border-gray-100 hover:bg-gray-50">
+                  <tr key={item.id} className="border-t border-[#EAEEF4] hover:bg-gray-50">
                     <td className="px-5 py-3 font-medium text-gray-800">{item.barang}</td>
                     <td className="px-5 py-3 text-gray-600">{item.teknisi}</td>
                     <td className="px-5 py-3 text-gray-600 whitespace-nowrap">{formatTanggal(item.tanggalMulai)}</td>
@@ -186,7 +186,7 @@ const Perbaikan = () => {
                       <select
                         value={item.status}
                         onChange={(e) => ubahStatus(item, e.target.value)}
-                        className={`px-2.5 py-1 rounded-full text-xs font-semibold border-0 focus:outline-none focus:ring-2 focus:ring-[#23845B] ${badgeStatus(item.status)}`}
+                        className={`px-2.5 py-1 rounded-full text-xs font-semibold border-0 focus:outline-none focus:ring-2 focus:ring-[#2975B2] ${badgeStatus(item.status)}`}
                       >
                         <option value="Berlangsung">Berlangsung</option>
                         <option value="Selesai">Selesai</option>
@@ -196,7 +196,7 @@ const Perbaikan = () => {
                     <td className="px-5 py-3 text-gray-700 font-medium whitespace-nowrap">{formatRupiah(item.biaya)}</td>
                     <td className="px-5 py-3">
                       <div className="flex gap-2">
-                        <button onClick={() => bukaUbah(item)} className="text-[#2878B5] hover:underline text-xs font-semibold">Ubah</button>
+                        <button onClick={() => bukaUbah(item)} className="text-[#2975B2] hover:underline text-xs font-semibold">Ubah</button>
                         <button onClick={() => hapus(item)} className="text-red-600 hover:underline text-xs font-semibold">Hapus</button>
                       </div>
                     </td>
@@ -206,7 +206,7 @@ const Perbaikan = () => {
             </tbody>
           </table>
         </div>
-        <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 text-sm text-gray-500">
+        <div className="flex items-center justify-between px-5 py-3 border-t border-[#EAEEF4] text-sm text-gray-500">
           <span>Halaman {page} dari {totalPages}</span>
           <div className="flex gap-2">
             <button disabled={page <= 1} onClick={() => setPage(page - 1)} className="px-3 py-1.5 rounded-lg border border-gray-200 disabled:opacity-40">Sebelumnya</button>
@@ -218,30 +218,30 @@ const Perbaikan = () => {
       {modalTerbuka && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-xl shadow-lg w-full max-w-lg p-6">
-            <h2 className="text-lg font-semibold text-[#163A5F]">{editId ? "Ubah Perbaikan" : "Tambah Perbaikan"}</h2>
+            <h2 className="text-lg font-semibold text-[#133354]">{editId ? "Ubah Perbaikan" : "Tambah Perbaikan"}</h2>
             <form onSubmit={simpan} className="flex flex-col gap-4 mt-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Nama Barang</label>
-                <input required value={form.barang} onChange={(e) => setForm({ ...form, barang: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="Contoh: Printer Canon PIXMA G2010" />
+                <input required value={form.barang} onChange={(e) => setForm({ ...form, barang: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="Contoh: Printer Canon PIXMA G2010" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Teknisi / Petugas</label>
-                <input required value={form.teknisi} onChange={(e) => setForm({ ...form, teknisi: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="Contoh: Pak Dedi Kurniawan" />
+                <input required value={form.teknisi} onChange={(e) => setForm({ ...form, teknisi: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="Contoh: Pak Dedi Kurniawan" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Tanggal Mulai</label>
-                  <input required type="date" value={form.tanggalMulai} onChange={(e) => setForm({ ...form, tanggalMulai: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" />
+                  <input required type="date" value={form.tanggalMulai} onChange={(e) => setForm({ ...form, tanggalMulai: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Estimasi Selesai</label>
-                  <input type="date" value={form.estimasiSelesai} onChange={(e) => setForm({ ...form, estimasiSelesai: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" />
+                  <input type="date" value={form.estimasiSelesai} onChange={(e) => setForm({ ...form, estimasiSelesai: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Status</label>
-                  <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+                  <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
                     <option value="Berlangsung">Berlangsung</option>
                     <option value="Selesai">Selesai</option>
                     <option value="Menunggu Suku Cadang">Menunggu Suku Cadang</option>
@@ -249,12 +249,12 @@ const Perbaikan = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Biaya (Rp)</label>
-                  <input required type="number" min="0" value={form.biaya} onChange={(e) => setForm({ ...form, biaya: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="150000" />
+                  <input required type="number" min="0" value={form.biaya} onChange={(e) => setForm({ ...form, biaya: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="150000" />
                 </div>
               </div>
               <div className="flex justify-end gap-2 pt-1">
                 <button type="button" onClick={() => setModalTerbuka(false)} className="px-4 py-2.5 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600">Batal</button>
-                <button type="submit" disabled={menyimpan} className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-5 py-2.5 rounded-lg disabled:opacity-60">
+                <button type="submit" disabled={menyimpan} className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg disabled:opacity-60">
                   {menyimpan ? "Menyimpan..." : "Simpan"}
                 </button>
               </div>

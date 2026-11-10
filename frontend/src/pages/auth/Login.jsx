@@ -79,6 +79,8 @@ switch (user.role) {
         </div>
 
         <div className="login-right">
+          <h2 className="login-form-title">Login to Your Account</h2>
+
           <form onSubmit={handleLogin}>
 
             {error && (

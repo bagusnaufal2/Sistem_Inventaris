@@ -88,10 +88,10 @@ const Kategori = () => {
           placeholder="Cari kategori..."
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-[#23845B]"
+          className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-[#2975B2]"
         />
         <div className="flex justify-end">
-          <button onClick={bukaTambah} className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-4 py-2.5 rounded-lg">
+          <button onClick={bukaTambah} className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-4 py-2.5 rounded-lg">
             + Tambah Kategori
           </button>
         </div>
@@ -117,16 +117,16 @@ const Kategori = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
           {kategori.map((item) => (
-            <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+            <div key={item.id} className="bg-white rounded-xl shadow-sm border border-[#EAEEF4] p-5">
               <div className="flex items-start justify-between">
-                <h2 className="text-lg font-semibold text-[#163A5F]">{item.nama}</h2>
+                <h2 className="text-lg font-semibold text-[#133354]">{item.nama}</h2>
                 <span className="bg-[#DCFCE7] text-[#16A34A] px-2.5 py-1 rounded-full text-xs font-semibold whitespace-nowrap">
                   {item.jumlahBarang} barang
                 </span>
               </div>
               <p className="text-sm text-gray-500 mt-2">{item.deskripsi || "-"}</p>
-              <div className="flex gap-2 mt-4 pt-4 border-t border-gray-100">
-                <button onClick={() => bukaUbah(item)} className="text-[#2878B5] hover:underline text-xs font-semibold">Ubah</button>
+              <div className="flex gap-2 mt-4 pt-4 border-t border-[#EAEEF4]">
+                <button onClick={() => bukaUbah(item)} className="text-[#2975B2] hover:underline text-xs font-semibold">Ubah</button>
                 <button onClick={() => hapus(item)} className="text-red-600 hover:underline text-xs font-semibold">Hapus</button>
               </div>
             </div>
@@ -137,19 +137,19 @@ const Kategori = () => {
       {modalTerbuka && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-xl shadow-lg w-full max-w-md p-6">
-            <h2 className="text-lg font-semibold text-[#163A5F]">{editId ? "Ubah Kategori" : "Tambah Kategori"}</h2>
+            <h2 className="text-lg font-semibold text-[#133354]">{editId ? "Ubah Kategori" : "Tambah Kategori"}</h2>
             <form onSubmit={simpan} className="flex flex-col gap-4 mt-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Nama Kategori</label>
-                <input required value={form.nama} onChange={(e) => setForm({ ...form, nama: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="Contoh: Elektronik" />
+                <input required value={form.nama} onChange={(e) => setForm({ ...form, nama: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="Contoh: Elektronik" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Deskripsi</label>
-                <textarea value={form.deskripsi} onChange={(e) => setForm({ ...form, deskripsi: e.target.value })} rows={3} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" />
+                <textarea value={form.deskripsi} onChange={(e) => setForm({ ...form, deskripsi: e.target.value })} rows={3} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" />
               </div>
               <div className="flex justify-end gap-2 pt-1">
                 <button type="button" onClick={() => setModalTerbuka(false)} className="px-4 py-2.5 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600">Batal</button>
-                <button type="submit" disabled={menyimpan} className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-5 py-2.5 rounded-lg disabled:opacity-60">
+                <button type="submit" disabled={menyimpan} className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg disabled:opacity-60">
                   {menyimpan ? "Menyimpan..." : "Simpan"}
                 </button>
               </div>

@@ -63,7 +63,7 @@ const Sidebar = () => {
         left: 0,
         top: 0,
         zIndex: 20,
-        background: "linear-gradient(180deg, #104F37 0%, #166042 50%, #1C714E 100%)",
+        background: "#133354",
         boxShadow: "5px 0px 27px rgba(0, 0, 0, 0.15)",
         padding: "14px",
         display: "flex",
@@ -84,10 +84,10 @@ const Sidebar = () => {
                 />
             <div className="flex flex-col">
                  <p className="text-base font-bold whitespace-nowrap">
-                    SMPIT At-Taufiq
+                    AT-Taufiq
                 </p>
-                <p className="text-xs text-blue-200">
-                    Sistem Inventaris
+                <p className="text-xs text-[#A4B5C7]">
+                    SARPRAS MANAGEMENT
                 </p>
             </div>
         </div>
@@ -104,7 +104,7 @@ const Sidebar = () => {
         </div>
 
         {isOpen && (
-          <p className="text-sm font-semibold text-blue-200 mb-4">
+          <p className="text-sm font-semibold text-[#A4B5C7] mb-4">
             MENU UTAMA
           </p>
         )}
@@ -126,13 +126,20 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <button
-        onClick={handleLogout}
-        className="flex items-center gap-3 p-3 rounded-lg text-white hover:bg-[#1C714E] w-full"
-      >
-        <span className="text-xl">⇥</span>
-        {isOpen && <span>Logout</span>}
-      </button>
+      <div className="flex flex-col gap-1 w-full">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 p-3 rounded-lg text-red-400 hover:bg-white/10 w-full"
+        >
+          <span className="text-xl">⇥</span>
+          {isOpen && <span>Logout</span>}
+        </button>
+        {isOpen && (
+          <p className="text-xs text-[#A4B5C7] px-3 pb-1">
+            SMPIT AT-Taufiq • v1.0
+          </p>
+        )}
+      </div>
     </div>
   );
 };

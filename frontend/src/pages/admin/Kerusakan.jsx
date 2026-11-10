@@ -5,8 +5,8 @@ import { formatTanggal, pesanError } from "../../utils/format";
 
 const badgeStatus = (status) => {
   if (status === "Selesai") return "bg-[#DCFCE7] text-[#16A34A]";
-  if (status === "Diproses") return "bg-[#DCEEFF] text-[#2878B5]";
-  return "bg-amber-100 text-amber-700";
+  // Menunggu / Diproses — oranye Figma
+  return "bg-[#FFF2DE] text-[#B45309]";
 };
 
 const formAwal = { barang: "", pelapor: "", deskripsi: "", tanggalLaporan: "" };
@@ -95,9 +95,9 @@ const Kerusakan = () => {
             placeholder="Cari barang / pelapor / kode..."
             value={q}
             onChange={(e) => { setQ(e.target.value); setPage(1); }}
-            className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-64 focus:outline-none focus:ring-2 focus:ring-[#23845B]"
+            className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-64 focus:outline-none focus:ring-2 focus:ring-[#2975B2]"
           />
-          <select value={filterStatus} onChange={(e) => { setFilterStatus(e.target.value); setPage(1); }} className="border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+          <select value={filterStatus} onChange={(e) => { setFilterStatus(e.target.value); setPage(1); }} className="border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
             <option value="">Semua Status</option>
             <option value="Menunggu">Menunggu</option>
             <option value="Diproses">Diproses</option>
@@ -105,7 +105,7 @@ const Kerusakan = () => {
           </select>
         </div>
         <div className="flex justify-end">
-          <button onClick={() => { setForm(formAwal); setModalTerbuka(true); }} className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-4 py-2.5 rounded-lg">
+          <button onClick={() => { setForm(formAwal); setModalTerbuka(true); }} className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-4 py-2.5 rounded-lg">
             + Lapor Kerusakan
           </button>
         </div>
@@ -124,11 +124,11 @@ const Kerusakan = () => {
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-xl shadow-sm border border-[#EAEEF4] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 text-left text-[#163A5F]">
+              <tr className="bg-[#F6F8FB] text-left text-xs uppercase tracking-wide text-gray-500">
                 <th className="px-5 py-3 font-semibold">ID</th>
                 <th className="px-5 py-3 font-semibold">Barang</th>
                 <th className="px-5 py-3 font-semibold">Pelapor</th>
@@ -145,8 +145,8 @@ const Kerusakan = () => {
                 <tr><td colSpan={7} className="px-5 py-8 text-center text-gray-400">Belum ada laporan kerusakan.</td></tr>
               ) : (
                 laporan.map((item) => (
-                  <tr key={item.id} className="border-t border-gray-100 hover:bg-gray-50">
-                    <td className="px-5 py-3 font-medium text-[#2878B5]">{item.kode}</td>
+                  <tr key={item.id} className="border-t border-[#EAEEF4] hover:bg-gray-50">
+                    <td className="px-5 py-3 font-medium text-[#2975B2]">{item.kode}</td>
                     <td className="px-5 py-3 font-medium text-gray-800">{item.barang}</td>
                     <td className="px-5 py-3 text-gray-600">{item.pelapor}</td>
                     <td className="px-5 py-3 text-gray-600 whitespace-nowrap">{formatTanggal(item.tanggalLaporan)}</td>
@@ -155,7 +155,7 @@ const Kerusakan = () => {
                       <select
                         value={item.status}
                         onChange={(e) => ubahStatus(item, e.target.value)}
-                        className={`px-2.5 py-1 rounded-full text-xs font-semibold border-0 focus:outline-none focus:ring-2 focus:ring-[#23845B] ${badgeStatus(item.status)}`}
+                        className={`px-2.5 py-1 rounded-full text-xs font-semibold border-0 focus:outline-none focus:ring-2 focus:ring-[#2975B2] ${badgeStatus(item.status)}`}
                       >
                         <option value="Menunggu">Menunggu</option>
                         <option value="Diproses">Diproses</option>
@@ -171,7 +171,7 @@ const Kerusakan = () => {
             </tbody>
           </table>
         </div>
-        <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 text-sm text-gray-500">
+        <div className="flex items-center justify-between px-5 py-3 border-t border-[#EAEEF4] text-sm text-gray-500">
           <span>Halaman {page} dari {totalPages}</span>
           <div className="flex gap-2">
             <button disabled={page <= 1} onClick={() => setPage(page - 1)} className="px-3 py-1.5 rounded-lg border border-gray-200 disabled:opacity-40">Sebelumnya</button>
@@ -183,29 +183,29 @@ const Kerusakan = () => {
       {modalTerbuka && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-xl shadow-lg w-full max-w-lg p-6">
-            <h2 className="text-lg font-semibold text-[#163A5F]">Lapor Kerusakan</h2>
+            <h2 className="text-lg font-semibold text-[#133354]">Lapor Kerusakan</h2>
             <form onSubmit={simpan} className="flex flex-col gap-4 mt-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Nama Barang</label>
-                <input required value={form.barang} onChange={(e) => setForm({ ...form, barang: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="Contoh: Printer Canon PIXMA G2010" />
+                <input required value={form.barang} onChange={(e) => setForm({ ...form, barang: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="Contoh: Printer Canon PIXMA G2010" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Pelapor</label>
-                  <input required value={form.pelapor} onChange={(e) => setForm({ ...form, pelapor: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="Contoh: Bu Rina Wulandari" />
+                  <input required value={form.pelapor} onChange={(e) => setForm({ ...form, pelapor: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="Contoh: Bu Rina Wulandari" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Tanggal Laporan</label>
-                  <input type="date" value={form.tanggalLaporan} onChange={(e) => setForm({ ...form, tanggalLaporan: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" />
+                  <input type="date" value={form.tanggalLaporan} onChange={(e) => setForm({ ...form, tanggalLaporan: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Deskripsi Kerusakan</label>
-                <textarea required value={form.deskripsi} onChange={(e) => setForm({ ...form, deskripsi: e.target.value })} rows={3} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="Jelaskan kerusakannya..." />
+                <textarea required value={form.deskripsi} onChange={(e) => setForm({ ...form, deskripsi: e.target.value })} rows={3} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="Jelaskan kerusakannya..." />
               </div>
               <div className="flex justify-end gap-2 pt-1">
                 <button type="button" onClick={() => setModalTerbuka(false)} className="px-4 py-2.5 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600">Batal</button>
-                <button type="submit" disabled={menyimpan} className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-5 py-2.5 rounded-lg disabled:opacity-60">
+                <button type="submit" disabled={menyimpan} className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg disabled:opacity-60">
                   {menyimpan ? "Menyimpan..." : "Kirim Laporan"}
                 </button>
               </div>

@@ -6,14 +6,14 @@ import { pesanError } from "../../utils/format";
 
 const badgeKondisi = (kondisi) => {
   if (kondisi === "Baik") return "bg-[#DCFCE7] text-[#16A34A]";
-  if (kondisi === "Rusak Ringan") return "bg-amber-100 text-amber-700";
+  if (kondisi === "Rusak Ringan") return "bg-[#FFF2DE] text-[#B45309]";
   return "bg-red-100 text-red-700";
 };
 
 const badgeStatus = (status) => {
   if (status === "Tersedia") return "bg-[#DCFCE7] text-[#16A34A]";
-  if (status === "Dipinjam") return "bg-[#DCEEFF] text-[#2878B5]";
-  return "bg-amber-100 text-amber-700";
+  if (status === "Dipinjam") return "bg-[#E6F2FF] text-[#2975B2]";
+  return "bg-[#FFF2DE] text-[#B45309]";
 };
 
 const formAwal = {
@@ -148,27 +148,27 @@ const Inventaris = () => {
             placeholder="Cari nama barang..."
             value={q}
             onChange={(e) => { setQ(e.target.value); setPage(1); }}
-            className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-[#23845B]"
+            className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-[#2975B2]"
           />
-          <select value={filterKategori} onChange={terapkanFilter(setFilterKategori)} className="border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+          <select value={filterKategori} onChange={terapkanFilter(setFilterKategori)} className="border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
             <option value="">Semua Kategori</option>
             {kategori.map((k) => (
               <option key={k.id} value={k.id}>{k.nama}</option>
             ))}
           </select>
-          <select value={filterLokasi} onChange={(e) => { terapkanFilter(setFilterLokasi)(e); setSearchParams(e.target.value ? { lokasiId: e.target.value } : {}); }} className="border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+          <select value={filterLokasi} onChange={(e) => { terapkanFilter(setFilterLokasi)(e); setSearchParams(e.target.value ? { lokasiId: e.target.value } : {}); }} className="border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
             <option value="">Semua Lokasi</option>
             {lokasi.map((l) => (
               <option key={l.id} value={l.id}>{l.nama}</option>
             ))}
           </select>
-          <select value={filterKondisi} onChange={terapkanFilter(setFilterKondisi)} className="border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+          <select value={filterKondisi} onChange={terapkanFilter(setFilterKondisi)} className="border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
             <option value="">Semua Kondisi</option>
             <option value="Baik">Baik</option>
             <option value="Rusak Ringan">Rusak Ringan</option>
             <option value="Rusak">Rusak</option>
           </select>
-          <select value={filterStatus} onChange={terapkanFilter(setFilterStatus)} className="border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+          <select value={filterStatus} onChange={terapkanFilter(setFilterStatus)} className="border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
             <option value="">Semua Status</option>
             <option value="Tersedia">Tersedia</option>
             <option value="Dipinjam">Dipinjam</option>
@@ -176,7 +176,7 @@ const Inventaris = () => {
           </select>
         </div>
         <div className="flex justify-end">
-          <button onClick={bukaTambah} className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-4 py-2.5 rounded-lg">
+          <button onClick={bukaTambah} className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-4 py-2.5 rounded-lg">
             + Tambah Barang
           </button>
         </div>
@@ -195,11 +195,11 @@ const Inventaris = () => {
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-xl shadow-sm border border-[#EAEEF4] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-gray-50 text-left text-[#163A5F]">
+              <tr className="bg-[#F6F8FB] text-left text-xs uppercase tracking-wide text-gray-500">
                 <th className="px-5 py-3 font-semibold">Nama Barang</th>
                 <th className="px-5 py-3 font-semibold">Kategori</th>
                 <th className="px-5 py-3 font-semibold">Lokasi</th>
@@ -215,7 +215,7 @@ const Inventaris = () => {
                 <tr><td colSpan={6} className="px-5 py-8 text-center text-gray-400">Belum ada barang yang cocok.</td></tr>
               ) : (
                 barang.map((item) => (
-                  <tr key={item.id} className="border-t border-gray-100 hover:bg-gray-50">
+                  <tr key={item.id} className="border-t border-[#EAEEF4] hover:bg-gray-50">
                     <td className="px-5 py-3 font-medium text-gray-800">{item.nama}</td>
                     <td className="px-5 py-3 text-gray-600">{item.kategori}</td>
                     <td className="px-5 py-3 text-gray-600">{item.lokasi}</td>
@@ -231,7 +231,7 @@ const Inventaris = () => {
                     </td>
                     <td className="px-5 py-3">
                       <div className="flex gap-2">
-                        <button onClick={() => bukaUbah(item)} className="text-[#2878B5] hover:underline text-xs font-semibold">Ubah</button>
+                        <button onClick={() => bukaUbah(item)} className="text-[#2975B2] hover:underline text-xs font-semibold">Ubah</button>
                         <button onClick={() => hapus(item)} className="text-red-600 hover:underline text-xs font-semibold">Hapus</button>
                       </div>
                     </td>
@@ -241,7 +241,7 @@ const Inventaris = () => {
             </tbody>
           </table>
         </div>
-        <div className="flex items-center justify-between px-5 py-3 border-t border-gray-100 text-sm text-gray-500">
+        <div className="flex items-center justify-between px-5 py-3 border-t border-[#EAEEF4] text-sm text-gray-500">
           <span>Halaman {page} dari {totalPages}</span>
           <div className="flex gap-2">
             <button disabled={page <= 1} onClick={() => setPage(page - 1)} className="px-3 py-1.5 rounded-lg border border-gray-200 disabled:opacity-40">Sebelumnya</button>
@@ -253,16 +253,16 @@ const Inventaris = () => {
       {modalTerbuka && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-xl shadow-lg w-full max-w-lg p-6">
-            <h2 className="text-lg font-semibold text-[#163A5F]">{editId ? "Ubah Barang" : "Tambah Barang"}</h2>
+            <h2 className="text-lg font-semibold text-[#133354]">{editId ? "Ubah Barang" : "Tambah Barang"}</h2>
             <form onSubmit={simpan} className="flex flex-col gap-4 mt-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Nama Barang</label>
-                <input required value={form.nama} onChange={(e) => setForm({ ...form, nama: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="Contoh: Laptop ASUS VivoBook 14" />
+                <input required value={form.nama} onChange={(e) => setForm({ ...form, nama: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="Contoh: Laptop ASUS VivoBook 14" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Kategori</label>
-                  <select required value={form.kategoriId} onChange={(e) => setForm({ ...form, kategoriId: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+                  <select required value={form.kategoriId} onChange={(e) => setForm({ ...form, kategoriId: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
                     <option value="">Pilih kategori</option>
                     {kategori.map((k) => (
                       <option key={k.id} value={k.id}>{k.nama}</option>
@@ -271,7 +271,7 @@ const Inventaris = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Lokasi</label>
-                  <select required value={form.lokasiId} onChange={(e) => setForm({ ...form, lokasiId: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+                  <select required value={form.lokasiId} onChange={(e) => setForm({ ...form, lokasiId: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
                     <option value="">Pilih lokasi</option>
                     {lokasi.map((l) => (
                       <option key={l.id} value={l.id}>{l.nama}</option>
@@ -282,7 +282,7 @@ const Inventaris = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Kondisi</label>
-                  <select value={form.kondisi} onChange={(e) => setForm({ ...form, kondisi: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+                  <select value={form.kondisi} onChange={(e) => setForm({ ...form, kondisi: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
                     <option value="Baik">Baik</option>
                     <option value="Rusak Ringan">Rusak Ringan</option>
                     <option value="Rusak">Rusak</option>
@@ -290,7 +290,7 @@ const Inventaris = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">Status</label>
-                  <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]">
+                  <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]">
                     <option value="Tersedia">Tersedia</option>
                     <option value="Dipinjam">Dipinjam</option>
                     <option value="Dalam Perbaikan">Dalam Perbaikan</option>
@@ -299,11 +299,11 @@ const Inventaris = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Deskripsi (opsional)</label>
-                <textarea value={form.deskripsi} onChange={(e) => setForm({ ...form, deskripsi: e.target.value })} rows={2} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" />
+                <textarea value={form.deskripsi} onChange={(e) => setForm({ ...form, deskripsi: e.target.value })} rows={2} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" />
               </div>
               <div className="flex justify-end gap-2 pt-1">
                 <button type="button" onClick={() => setModalTerbuka(false)} className="px-4 py-2.5 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600">Batal</button>
-                <button type="submit" disabled={menyimpan} className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-5 py-2.5 rounded-lg disabled:opacity-60">
+                <button type="submit" disabled={menyimpan} className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg disabled:opacity-60">
                   {menyimpan ? "Menyimpan..." : "Simpan"}
                 </button>
               </div>

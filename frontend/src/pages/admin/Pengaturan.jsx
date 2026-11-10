@@ -40,8 +40,8 @@ const Pengaturan = () => {
       title="Pengaturan"
       description="Pengaturan umum Sistem Inventaris SMPIT At-Taufiq."
     >
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 max-w-2xl">
-        <h2 className="text-lg font-semibold text-[#163A5F]">Pengaturan Umum</h2>
+      <div className="bg-white rounded-xl shadow-sm border border-[#EAEEF4] p-6 max-w-2xl">
+        <h2 className="text-lg font-semibold text-[#133354]">Pengaturan Umum</h2>
         <p className="text-sm text-gray-500 mt-1">
           Ubah informasi dasar sekolah dan sistem di bawah ini.
         </p>
@@ -63,7 +63,7 @@ const Pengaturan = () => {
               type="text"
               value={form.namaSekolah}
               onChange={handleChange}
-              className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]"
+              className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]"
             />
           </div>
 
@@ -77,7 +77,7 @@ const Pengaturan = () => {
               type="email"
               value={form.emailAdmin}
               onChange={handleChange}
-              className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]"
+              className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]"
             />
           </div>
 
@@ -91,7 +91,7 @@ const Pengaturan = () => {
               type="text"
               value={form.tahunAjaran}
               onChange={handleChange}
-              className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]"
+              className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]"
             />
           </div>
 
@@ -104,7 +104,7 @@ const Pengaturan = () => {
               name="zonaWaktu"
               value={form.zonaWaktu}
               onChange={handleChange}
-              className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#23845B]"
+              className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2975B2]"
             >
               <option value="Asia/Jakarta">Asia/Jakarta (WIB)</option>
               <option value="Asia/Makassar">Asia/Makassar (WITA)</option>
@@ -115,7 +115,7 @@ const Pengaturan = () => {
           <div>
             <button
               type="submit"
-              className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-5 py-2.5 rounded-lg"
+              className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg"
             >
               Simpan Pengaturan
             </button>

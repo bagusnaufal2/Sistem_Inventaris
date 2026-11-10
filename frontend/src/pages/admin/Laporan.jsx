@@ -3,6 +3,7 @@ import MainWrapper from "../../components/layout/MainWrapper";
 import {
   BarChart,
   Bar,
+  Cell,
   LineChart,
   Line,
   XAxis,
@@ -38,6 +39,9 @@ const Laporan = () => {
   }, []);
 
   const ringkasan = statistik?.ringkasan || {};
+  // Batang tertinggi memakai biru utama Figma (#2975B2), sisanya biru muda (#ADD1ED).
+  const perKategori = statistik?.perKategori || [];
+  const jumlahTerbesar = Math.max(0, ...perKategori.map((d) => d.jumlah ?? 0));
   const cards = [
     { title: "Total Inventaris", value: String(ringkasan.totalInventaris ?? 0), description: "Seluruh barang terdaftar" },
     { title: "Kondisi Baik", value: String(ringkasan.inventarisBaik ?? 0), description: "Barang dalam kondisi baik" },
@@ -63,24 +67,24 @@ const Laporan = () => {
           {/* Kartu ringkasan */}
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
             {cards.map((card) => (
-              <div key={card.title} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+              <div key={card.title} className="bg-white rounded-xl p-5 shadow-sm border border-[#EAEEF4]">
                 <p className="text-sm text-gray-500">{card.title}</p>
-                <h3 className="text-3xl font-bold text-[#166143] mt-3">{card.value}</h3>
+                <h3 className="text-3xl font-bold text-[#133354] mt-3">{card.value}</h3>
                 <p className="text-xs text-gray-400 mt-4">{card.description}</p>
               </div>
             ))}
           </div>
 
-          <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 flex flex-wrap gap-x-8 gap-y-2 text-sm text-gray-600">
-            <span>Laporan menunggu: <strong className="text-[#163A5F]">{ringkasan.laporanMenunggu ?? 0}</strong></span>
-            <span>Perbaikan berlangsung: <strong className="text-[#163A5F]">{ringkasan.perbaikanBerlangsung ?? 0}</strong></span>
-            <span>Total biaya perbaikan: <strong className="text-[#163A5F]">{formatRupiah(ringkasan.totalBiayaPerbaikan ?? 0)}</strong></span>
+          <div className="bg-white rounded-xl p-5 shadow-sm border border-[#EAEEF4] flex flex-wrap gap-x-8 gap-y-2 text-sm text-gray-600">
+            <span>Laporan menunggu: <strong className="text-[#133354]">{ringkasan.laporanMenunggu ?? 0}</strong></span>
+            <span>Perbaikan berlangsung: <strong className="text-[#133354]">{ringkasan.perbaikanBerlangsung ?? 0}</strong></span>
+            <span>Total biaya perbaikan: <strong className="text-[#133354]">{formatRupiah(ringkasan.totalBiayaPerbaikan ?? 0)}</strong></span>
           </div>
 
           {/* Grafik */}
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-              <h2 className="text-lg font-semibold text-[#163A5F]">Jumlah Barang per Kategori</h2>
+            <div className="bg-white rounded-xl shadow-sm border border-[#EAEEF4] p-5">
+              <h2 className="text-lg font-semibold text-[#133354]">Jumlah Barang per Kategori</h2>
               <p className="text-sm text-gray-500 mt-1">Distribusi inventaris berdasarkan kategori barang.</p>
               <div className="h-72 mt-4">
                 <ResponsiveContainer width="100%" height="100%">
@@ -89,14 +93,21 @@ const Laporan = () => {
                     <XAxis dataKey="kategori" tick={{ fontSize: 12 }} />
                     <YAxis tick={{ fontSize: 12 }} />
                     <Tooltip />
-                    <Bar dataKey="jumlah" fill="#23845B" radius={[6, 6, 0, 0]} />
+                    <Bar dataKey="jumlah" radius={[6, 6, 0, 0]}>
+                      {perKategori.map((d) => (
+                        <Cell
+                          key={d.kategori}
+                          fill={d.jumlah === jumlahTerbesar && jumlahTerbesar > 0 ? "#2975B2" : "#ADD1ED"}
+                        />
+                      ))}
+                    </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-              <h2 className="text-lg font-semibold text-[#163A5F]">Tren Laporan Kerusakan</h2>
+            <div className="bg-white rounded-xl shadow-sm border border-[#EAEEF4] p-5">
+              <h2 className="text-lg font-semibold text-[#133354]">Tren Laporan Kerusakan</h2>
               <p className="text-sm text-gray-500 mt-1">Jumlah laporan kerusakan per bulan (6 bulan terakhir).</p>
               <div className="h-72 mt-4">
                 <ResponsiveContainer width="100%" height="100%">
@@ -105,7 +116,7 @@ const Laporan = () => {
                     <XAxis dataKey="bulan" tick={{ fontSize: 12 }} />
                     <YAxis tick={{ fontSize: 12 }} />
                     <Tooltip />
-                    <Line type="monotone" dataKey="laporan" stroke="#2878B5" strokeWidth={2} dot={{ fill: "#2878B5" }} />
+                    <Line type="monotone" dataKey="laporan" stroke="#2975B2" strokeWidth={2} dot={{ fill: "#2975B2" }} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>

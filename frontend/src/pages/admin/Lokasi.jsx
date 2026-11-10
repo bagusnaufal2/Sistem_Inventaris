@@ -90,10 +90,10 @@ const Lokasi = () => {
           placeholder="Cari ruangan..."
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-[#23845B]"
+          className="border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-[#2975B2]"
         />
         <div className="flex justify-end">
-          <button onClick={bukaTambah} className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-4 py-2.5 rounded-lg">
+          <button onClick={bukaTambah} className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-4 py-2.5 rounded-lg">
             + Tambah Ruangan
           </button>
         </div>
@@ -119,14 +119,14 @@ const Lokasi = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
           {ruangan.map((item) => (
-            <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-              <h2 className="text-lg font-semibold text-[#163A5F]">{item.nama}</h2>
+            <div key={item.id} className="bg-white rounded-xl shadow-sm border border-[#EAEEF4] p-5">
+              <h2 className="text-lg font-semibold text-[#133354]">{item.nama}</h2>
               <p className="text-sm text-gray-500 mt-1">{item.gedung || "-"}</p>
 
-              <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+              <div className="flex items-center justify-between mt-4 pt-4 border-t border-[#EAEEF4]">
                 <div>
                   <p className="text-xs text-gray-400">Jumlah Barang</p>
-                  <p className="text-2xl font-bold text-[#166143] mt-1">{item.jumlahBarang}</p>
+                  <p className="text-2xl font-bold text-[#133354] mt-1">{item.jumlahBarang}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-xs text-gray-400">Penanggung Jawab</p>
@@ -135,8 +135,8 @@ const Lokasi = () => {
               </div>
 
               <div className="flex gap-2 mt-4">
-                <button onClick={() => navigate(`/admin/inventaris?lokasiId=${item.id}`)} className="text-[#2878B5] hover:underline text-xs font-semibold">Lihat Barang</button>
-                <button onClick={() => bukaUbah(item)} className="text-[#2878B5] hover:underline text-xs font-semibold">Ubah</button>
+                <button onClick={() => navigate(`/admin/inventaris?lokasiId=${item.id}`)} className="text-[#2975B2] hover:underline text-xs font-semibold">Lihat Barang</button>
+                <button onClick={() => bukaUbah(item)} className="text-[#2975B2] hover:underline text-xs font-semibold">Ubah</button>
                 <button onClick={() => hapus(item)} className="text-red-600 hover:underline text-xs font-semibold">Hapus</button>
               </div>
             </div>
@@ -147,23 +147,23 @@ const Lokasi = () => {
       {modalTerbuka && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-xl shadow-lg w-full max-w-md p-6">
-            <h2 className="text-lg font-semibold text-[#163A5F]">{editId ? "Ubah Ruangan" : "Tambah Ruangan"}</h2>
+            <h2 className="text-lg font-semibold text-[#133354]">{editId ? "Ubah Ruangan" : "Tambah Ruangan"}</h2>
             <form onSubmit={simpan} className="flex flex-col gap-4 mt-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Nama Ruangan</label>
-                <input required value={form.nama} onChange={(e) => setForm({ ...form, nama: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="Contoh: Ruang Kelas 7A" />
+                <input required value={form.nama} onChange={(e) => setForm({ ...form, nama: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="Contoh: Ruang Kelas 7A" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Gedung</label>
-                <input value={form.gedung} onChange={(e) => setForm({ ...form, gedung: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="Contoh: Gedung A — Lantai 1" />
+                <input value={form.gedung} onChange={(e) => setForm({ ...form, gedung: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="Contoh: Gedung A — Lantai 1" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">Penanggung Jawab</label>
-                <input value={form.penanggungJawab} onChange={(e) => setForm({ ...form, penanggungJawab: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#23845B]" placeholder="Contoh: Bu Siti Aminah" />
+                <input value={form.penanggungJawab} onChange={(e) => setForm({ ...form, penanggungJawab: e.target.value })} className="w-full border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#2975B2]" placeholder="Contoh: Bu Siti Aminah" />
               </div>
               <div className="flex justify-end gap-2 pt-1">
                 <button type="button" onClick={() => setModalTerbuka(false)} className="px-4 py-2.5 rounded-lg border border-gray-200 text-sm font-semibold text-gray-600">Batal</button>
-                <button type="submit" disabled={menyimpan} className="bg-[#23845B] hover:bg-[#1B6B49] text-white text-sm font-semibold px-5 py-2.5 rounded-lg disabled:opacity-60">
+                <button type="submit" disabled={menyimpan} className="bg-[#2975B2] hover:bg-[#1F598A] text-white text-sm font-semibold px-5 py-2.5 rounded-lg disabled:opacity-60">
                   {menyimpan ? "Menyimpan..." : "Simpan"}
                 </button>
               </div>
